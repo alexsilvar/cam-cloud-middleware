@@ -1,0 +1,22 @@
+{
+  "name": "cam-cloud-middleware",
+  "version": "1.0.0",
+  "description": "Middleware to handle IP Camera Data to Cloud IA recognition",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "IA",
+    "IOT"
+  ],
+  "author": "Alexsander R.S.",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "querystring": "^0.2.0",
+    "yargs": "^15.3.1"
+  }
+}
