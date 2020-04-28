@@ -47,6 +47,32 @@ app.get('/situation', (req, res) => {
     }, 5000);
 });
 
+app.get('/situationImage', (req, res) => {
+    setTimeout(() => {
+        getFrame(CAM_URI).then(response => {
+            let img = Buffer.from(response.data);
+            return cognitive.analyseImage(img)
+                .then(msResult => {
+                    cognitive.drawOver(img, msResult.data['predictions'], (err, newImage) => {
+                        if (err) {
+                            res.status(500).send({ msg: 'Erro ao processar imagem', erro: err });
+                        } else {
+                            res.set('Content-Type', 'image/jpg');
+                            res.send(Buffer.from(newImage));
+                        }
+                    });
+                })
+                .catch(err => {
+                    console.log(err);
+                    res.status(400).send(err);
+                });
+        }).catch(err => {
+            // console.log('Erro');
+            res.status(400).send(err);
+        });
+    }, 5000);
+});
+
 if (PORT && CAM_URI) {
     app.listen(PORT, () => {
         console.log(`listening to port ${PORT}`);
